@@ -1,8 +1,19 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index d2c8913..2a4e24e 100644
+index d2c8913..4c93f85 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -118,3 +118,50 @@ if(MSVC)
+@@ -1,5 +1,10 @@
+ cmake_minimum_required(VERSION 3.22)
+ 
++get_filename_component(app_source "${CMAKE_CURRENT_LIST_DIR}" REALPATH)
++add_subdirectory("${app_source}/../aap-juce" "${CMAKE_CURRENT_BINARY_DIR}/aap-juce" EXCLUDE_FROM_ALL)
++aap_juce_configure(JUCE_SOURCE_DIR ../JUCE ICON Source/UI/Images/icon.png ADOPT_EXISTING_PATCHES)
++
++
+ if(APPLE)
+     set(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum macOS deployment version" FORCE)
+ endif()
+@@ -118,3 +123,50 @@ if(MSVC)
      target_link_options(Altar_VST3 PRIVATE /INCREMENTAL:NO)
      target_link_options(Altar_Standalone PRIVATE /INCREMENTAL:NO)
  endif()
